@@ -30,36 +30,26 @@
   <style>
     * { font-family: 'Be Vietnam Pro', sans-serif; }
     body { margin: 0; overflow-x: hidden; }
-
-    /* === ANIMATION: Vat pham roi === */
     @keyframes fall {
       0% { transform: translateY(-40px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
     }
     .animate-fall { animation: fall linear infinite; }
-
-    /* === ANIMATION: Zoom in modal === */
     @keyframes zoomIn {
       0% { transform: scale(0.9); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
     .animate-zoom-in { animation: zoomIn 0.3s ease-out forwards; }
-
-    /* === ANIMATION: Slide up fade in === */
     @keyframes slideUpFade {
       0% { transform: translateY(16px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
     .animate-slide-up { animation: slideUpFade 0.5s ease-out forwards; }
-
-    /* === ANIMATION: Pulse glow cho the === */
     @keyframes pulseGlow {
       0%, 100% { box-shadow: 0 0 8px rgba(255,215,0,0.2); }
       50% { box-shadow: 0 0 24px rgba(255,215,0,0.4); }
     }
     .card-glow:hover { animation: pulseGlow 1.5s ease-in-out infinite; }
-
-    /* === Chan select text === */
     .no-select {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -70,45 +60,16 @@
 </head>
 
 <body class="no-select">
-
-  <!-- ========================================= -->
-  <!--          CANVAS PHAO BONG NEN             -->
-  <!-- ========================================= -->
   <canvas id="fireworks-canvas" style="position:fixed;inset:0;z-index:50;pointer-events:none;"></canvas>
-
-  <!-- ========================================= -->
-  <!--          VAT PHAM ROI (TET)               -->
-  <!-- ========================================= -->
   <div id="falling-container" style="position:fixed;inset:0;z-index:10;pointer-events:none;overflow:hidden;" aria-hidden="true"></div>
-
-  <!-- ========================================= -->
-  <!--          NHAC NEN                         -->
-  <!-- Them file: sounds/background.mp3          -->
-  <!-- Uncomment dong duoi:                      -->
-  <!-- ========================================= -->
-
   <audio autoplay loop id="bg-music">
     <source src="bg.mp3" type="audio/mpeg" />
   </audio>
-
-
-  <!-- ========================================= -->
-  <!--          TRANG CHINH                      -->
-  <!-- ========================================= -->
   <main class="relative min-h-screen overflow-hidden" style="background:#8B0000;">
-
-    <!-- === HINH NEN TET === -->
-    <!-- Them file: images/tet-bg.jpg -->
     <div style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.10;">
       <img src="minh3.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" />
     </div>
-
-    <!-- === NOI DUNG CHINH === -->
     <div class="relative flex min-h-screen flex-col items-center px-4 py-8" style="z-index:20;">
-
-      <!-- =============================== -->
-      <!--         TIEU DE                 -->
-      <!-- =============================== -->
       <header class="mb-8 text-center">
         <h1 class="mb-2 text-3xl md:text-5xl font-black tracking-tight drop-shadow-lg" style="color:#FFD700;">
           Câu Đố 2026 - Mùng 2
@@ -116,8 +77,6 @@
         <p class="text-xl md:text-2xl font-bold drop-shadow-md" style="color:#FFF8DC;">
           Đớp Lì Xì của Minh
         </p>
-        <!-- Hinh ngua trang tri -->
-        <!-- Them file: images/horse.jpg -->
         <div class="mt-4 flex justify-center">
           <div style="width:128px;height:128px;" class="md:w-40 md:h-40 relative">
             <img
@@ -129,10 +88,6 @@
           </div>
         </div>
       </header>
-
-      <!-- =============================== -->
-      <!--    MAN HINH NHAP TEN            -->
-      <!-- =============================== -->
       <div id="name-screen" class="w-full max-w-md animate-slide-up">
         <div class="rounded-2xl border-2 p-8 shadow-2xl" style="border-color:#FFD700;background:#A50000;">
           <h2 class="mb-6 text-center text-2xl font-bold" style="color:#FFD700;">
@@ -160,20 +115,11 @@
           </button>
         </div>
       </div>
-
-      <!-- =============================== -->
-      <!--    MAN HINH TRO CHOI            -->
-      <!-- =============================== -->
       <div id="game-screen" class="w-full max-w-2xl" style="display:none;">
-        <!-- Chao nguoi choi -->
         <p class="mb-6 text-center text-lg" style="color:#FFE4B5;">
           Xin chào, <span id="player-greeting" class="font-bold" style="color:#FFD700;"></span>! Chọn đi bạn :
         </p>
-
-        <!-- Grid 4 the -->
         <div class="grid grid-cols-2 gap-4 md:gap-6" id="cards-grid">
-
-          <!-- THE 1: SO THICH -->
           <button onclick="handleCardClick('so-thich')" id="card-so-thich"
             class="card-glow group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer active:scale-95 hover:scale-105"
             style="border-color:#FFD700;background:#A50000;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);"
@@ -181,14 +127,11 @@
             onmouseout="this.style.background='#A50000';this.style.borderColor='#FFD700'"
           >
             <div class="flex h-16 w-16 items-center justify-center rounded-full transition-colors" style="background:rgba(255,215,0,0.2);">
-              <!-- Lucide Heart SVG -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
             </div>
             <h3 class="text-lg font-bold" style="color:#FFD700;">Sở thích</h3>
             <span class="rounded-full px-3 py-1 text-sm font-semibold" style="background:rgba(255,215,0,0.2);color:#FFE4B5;">2.000 VND</span>
           </button>
-
-          <!-- THE 2: CON SO -->
           <button onclick="handleCardClick('con-so')" id="card-con-so"
             class="card-glow group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer active:scale-95 hover:scale-105"
             style="border-color:#FFD700;background:#A50000;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);"
@@ -196,14 +139,11 @@
             onmouseout="this.style.background='#A50000';this.style.borderColor='#FFD700'"
           >
             <div class="flex h-16 w-16 items-center justify-center rounded-full transition-colors" style="background:rgba(255,215,0,0.2);">
-              <!-- Lucide Hash SVG -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
             </div>
             <h3 class="text-lg font-bold" style="color:#FFD700;">Con số</h3>
             <span class="rounded-full px-3 py-1 text-sm font-semibold" style="background:rgba(255,215,0,0.2);color:#FFE4B5;">3.000 VND</span>
           </button>
-
-          <!-- THE 3: SO TRUONG -->
           <button onclick="handleCardClick('so-truong')" id="card-so-truong"
             class="card-glow group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer active:scale-95 hover:scale-105"
             style="border-color:#FFD700;background:#A50000;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);"
@@ -211,14 +151,11 @@
             onmouseout="this.style.background='#A50000';this.style.borderColor='#FFD700'"
           >
             <div class="flex h-16 w-16 items-center justify-center rounded-full transition-colors" style="background:rgba(255,215,0,0.2);">
-              <!-- Lucide Star SVG -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
             <h3 class="text-lg font-bold" style="color:#FFD700;">Sở trường</h3>
             <span class="rounded-full px-3 py-1 text-sm font-semibold" style="background:rgba(255,215,0,0.2);color:#FFE4B5;">3.000 VND</span>
           </button>
-
-          <!-- THE 4: CRUSH -->
           <button onclick="handleCardClick('crush')" id="card-crush"
             class="card-glow group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer active:scale-95 hover:scale-105"
             style="border-color:#FFD700;background:#A50000;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);"
@@ -226,15 +163,12 @@
             onmouseout="this.style.background='#A50000';this.style.borderColor='#FFD700'"
           >
             <div class="flex h-16 w-16 items-center justify-center rounded-full transition-colors" style="background:rgba(255,215,0,0.2);">
-              <!-- Lucide Sparkles SVG -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
             </div>
             <h3 class="text-lg font-bold" style="color:#FFD700;">Crush</h3>
             <span class="rounded-full px-3 py-1 text-sm font-semibold" style="background:rgba(255,215,0,0.2);color:#FFE4B5;">10.000 VND</span>
           </button>
         </div>
-
-        <!-- Tien do -->
         <div class="mt-8 text-center">
           <p class="text-sm" style="color:rgba(255,228,181,0.6);">
             Đã hoàn thành: <span id="progress-count" class="font-bold" style="color:#FFD700;">0</span> / 4 thử thách
@@ -243,21 +177,14 @@
       </div>
     </div>
   </main>
-
-  <!-- ========================================= -->
-  <!--     MODAL BANG PHAN THUONG                -->
-  <!-- ========================================= -->
   <div id="prize-modal" style="display:none;position:fixed;inset:0;z-index:60;" class="flex items-center justify-center p-4 backdrop-blur-sm" onclick="event.target===this&&closePrize()">
     <div style="background:rgba(0,0,0,0.7);position:absolute;inset:0;z-index:0;"></div>
     <div class="relative w-full max-w-md animate-zoom-in" style="z-index:1;">
       <div class="rounded-2xl border-2 p-8 shadow-2xl" style="border-color:#FFD700;background:#8B0000;">
-        <!-- Header -->
         <div class="mb-6 flex items-center justify-center gap-2">
-          <!-- Lucide Gift SVG -->
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
           <h2 class="text-2xl font-black" style="color:#FFD700;">Phần thưởng Mini Game Mùng 2</h2>
         </div>
-        <!-- Danh sach phan thuong -->
         <div class="mb-6 space-y-3">
           <div class="flex items-center justify-between rounded-xl px-4 py-3" style="background:#6B0000;">
             <span class="font-semibold" style="color:#FFF8DC;">🎮 Thẻ Sở thích</span>
@@ -279,11 +206,9 @@
             </div>
           </div>
         </div>
-        <!-- Ghi chu -->
         <p class="mb-6 text-center text-sm" style="color:rgba(255,228,181,0.7);">
           Trả lời hết câu hỏi và cap màn hình gửi cho Minh để nhận thưởng!
         </p>
-        <!-- Nut choi -->
         <button onclick="closePrize()" class="w-full rounded-xl px-6 py-3 text-lg font-bold transition-all hover:shadow-lg"
           style="background:#FFD700;color:#8B0000;"
           onmouseover="this.style.background='#FFED4A'"
@@ -294,27 +219,18 @@
       </div>
     </div>
   </div>
-
-  <!-- ========================================= -->
-  <!--     MODAL CAU HOI                         -->
-  <!-- ========================================= -->
   <div id="quiz-modal" style="display:none;position:fixed;inset:0;z-index:60;" class="flex items-center justify-center p-4 backdrop-blur-sm">
     <div style="background:rgba(0,0,0,0.7);position:absolute;inset:0;z-index:0;"></div>
     <div class="relative w-full max-w-md animate-zoom-in" style="z-index:1;">
       <div class="rounded-2xl border-2 p-6 shadow-2xl" style="border-color:#FFD700;background:#8B0000;">
-        <!-- Nut dong -->
         <button onclick="closeQuiz()" class="absolute top-4 right-4 rounded-full p-1 transition-colors hover:bg-yellow-500/20"
           style="color:rgba(255,215,0,0.6);" aria-label="Đóng">
-          <!-- Lucide X SVG -->
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
-        <!-- The dang chon -->
         <div class="mb-4 text-center">
           <span id="quiz-card-title" class="inline-block rounded-full px-4 py-1 text-sm font-semibold" style="background:rgba(255,215,0,0.2);color:#FFD700;"></span>
         </div>
-        <!-- Cau hoi -->
         <h3 id="quiz-question" class="mb-6 text-center text-xl font-bold" style="color:#FFF8DC;"></h3>
-        <!-- O nhap dap an -->
         <input
           id="quiz-input"
           type="text"
@@ -328,7 +244,6 @@
           onfocus="this.style.borderColor='#FFD700'"
           onblur="this.style.borderColor='rgba(255,215,0,0.4)'"
         />
-        <!-- Nut tra loi -->
         <button onclick="submitAnswer()" id="submit-btn"
           class="w-full rounded-xl px-6 py-3 text-lg font-bold transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-40"
           style="background:#FFD700;color:#8B0000;"
@@ -340,13 +255,8 @@
       </div>
     </div>
   </div>
-
-  <!-- ========================================= -->
-  <!--     MODAL KET QUA DUNG                    -->
-  <!-- ========================================= -->
   <div id="result-correct-modal" style="display:none;position:fixed;inset:0;z-index:70;" class="flex items-center justify-center p-4 backdrop-blur-sm">
     <div style="background:rgba(0,0,0,0.8);position:absolute;inset:0;z-index:0;"></div>
-    <!-- Canvas phao hoa chuc mung -->
     <canvas id="result-fireworks-canvas" style="position:fixed;inset:0;z-index:1;pointer-events:none;"></canvas>
     <div class="relative w-full max-w-md animate-zoom-in" style="z-index:2;">
       <div class="rounded-2xl border-2 p-8 text-center shadow-2xl" style="border-color:#FFD700;background:#8B0000;">
@@ -355,12 +265,6 @@
         <p class="mb-6 text-lg leading-relaxed" style="color:#FFF8DC;">
           Bạn đã vượt qua thử thách <span id="result-card-title" class="font-bold" style="color:#FFD700;"></span>, hãy cap màn hình lại và gửi cho Minh hoặc tiếp tục chơi để nhận được lì xì mùng 2!
         </p>
-
-        <!-- === HINH ANH CHUC MUNG ===
-             Them hinh anh vao images/congrats.jpg (hoac .png)
-             Uncomment dong duoi day de hien thi anh:
-        -->
-
         <img
           src="minh2.jpg"
           alt="Giỏi dữ tarrrrr :(           )"
@@ -378,10 +282,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ========================================= -->
-  <!--     MODAL KET QUA SAI (KHONG MAU)         -->
-  <!-- ========================================= -->
   <div id="result-wrong-modal" style="display:none;position:fixed;inset:0;z-index:70;" class="flex items-center justify-center p-4 backdrop-blur-sm">
     <div style="background:rgba(0,0,0,0.8);position:absolute;inset:0;z-index:0;"></div>
     <div class="relative w-full max-w-md animate-zoom-in" style="z-index:1;">
@@ -400,22 +300,10 @@
       </div>
     </div>
   </div>
-
-
-  <!-- ========================================= -->
-  <!--          JAVASCRIPT GAME LOGIC            -->
-  <!-- ========================================= -->
   <script>
   (function() {
     "use strict";
-
-    /* ============================================
-     *  CHAN DEV TOOLS
-     * ============================================ */
-    // Chan click chuot phai
     document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
-
-    // Chan cac phim tat dev tools
     document.addEventListener("keydown", function(e) {
       if (e.key === "F12") { e.preventDefault(); return; }
       if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i")) { e.preventDefault(); return; }
@@ -423,17 +311,9 @@
       if (e.ctrlKey && (e.key === "u" || e.key === "U")) { e.preventDefault(); return; }
       if (e.ctrlKey && e.shiftKey && (e.key === "C" || e.key === "c")) { e.preventDefault(); return; }
     });
-
-    /* ============================================
-     *  MA HOA DAP AN (base64)
-     * ============================================ */
     function _e(s) {
       return btoa(unescape(encodeURIComponent(s.toLowerCase())));
     }
-
-    /* ============================================
-     *  BO CAU HOI
-     * ============================================ */
     var questionBank = {
       "so-thich": [
         { q: "Minh thích chơi thứ gì nhất?", a: _e("rubik") },
@@ -451,25 +331,16 @@
         { q: "Minh thích ai?", a: _e("không có") }
       ]
     };
-
     var cardTitles = {
       "so-thich": "Sở thích",
       "con-so": "Con số",
       "so-truong": "Sở trường",
       "crush": "Crush"
     };
-
-    /* ============================================
-     *  TRANG THAI TRO CHOI
-     * ============================================ */
     var playerName = "";
     var activeCard = null;
     var currentQuestion = null;
     var completedCards = {};
-
-    /* ============================================
-     *  NHAP TEN NGUOI CHOI
-     * ============================================ */
     var nameInput = document.getElementById("name-input");
     nameInput.addEventListener("keydown", function(e) {
       if (e.key === "Enter") window.handleNameSubmit();
@@ -479,12 +350,10 @@
       var val = nameInput.value.trim();
       if (!val) return;
       playerName = val;
-
-      // GIẢM NHẠC NỀN AN TOÀN TẠI ĐÂY
       var bgMusic = document.getElementById("bg-music");
       if (bgMusic) {
-        bgMusic.volume = 0.9; // Chỉnh mức 15% cho êm
-        bgMusic.play().catch(function(){}); // Đảm bảo nhạc phát khi bấm nút
+        bgMusic.volume = 0.9;
+        bgMusic.play().catch(function(){});
       }
 
       document.getElementById("name-screen").style.display = "none";
@@ -494,19 +363,10 @@
       // Hien bang phan thuong
       document.getElementById("prize-modal").style.display = "flex";
     };
-
-    /* ============================================
-     *  BANG PHAN THUONG
-     * ============================================ */
     window.closePrize = function() {
       document.getElementById("prize-modal").style.display = "none";
     };
-
-    /* ============================================
-     *  XU LY CHON THE
-     * ============================================ */
     window.handleCardClick = function(cardId) {
-
       var okok = new Audio("sound00_00000032.mp3");
       okok.volume = 1;
       okok.play().catch(function(){});
@@ -517,8 +377,6 @@
       var randomQ = questions[Math.floor(Math.random() * questions.length)];
       currentQuestion = randomQ;
       activeCard = cardId;
-
-      // Hien modal cau hoi
       document.getElementById("quiz-card-title").textContent = cardTitles[cardId];
       document.getElementById("quiz-question").textContent = randomQ.q;
       document.getElementById("quiz-input").value = "";
@@ -527,126 +385,83 @@
         document.getElementById("quiz-input").focus();
       }, 100);
     };
-
-    // Enter de tra loi
     document.getElementById("quiz-input").addEventListener("keydown", function(e) {
       if (e.key === "Enter") window.submitAnswer();
     });
-
-    /* ============================================
-     *  KIEM TRA DAP AN
-     * ============================================ */
     window.submitAnswer = function() {
       var answer = document.getElementById("quiz-input").value.trim();
       if (!answer || !currentQuestion) return;
       var encoded = _e(answer.toLowerCase());
       var isCorrect = (encoded === currentQuestion.a);
-
-      // Dong modal cau hoi
       document.getElementById("quiz-modal").style.display = "none";
-
       if (isCorrect) {
-        // Danh dau hoan thanh
         completedCards[activeCard] = true;
         updateCardUI(activeCard);
         updateProgress();
-
-        // Hien modal dung
         document.getElementById("result-card-title").textContent = cardTitles[activeCard];
         document.getElementById("result-correct-modal").style.display = "flex";
         startResultFireworks();
-
-        /* === AM THANH KHI TRA LOI DUNG ===
-         * Them file: sounds/correct.mp3
-         * Uncomment dong duoi:
-         */
         var correctSound = new Audio("sound00_00000032.mp3");
         correctSound.volume = 1;
         correctSound.play().catch(function(){});
-
       } else {
-        // Hien modal sai
-
         completedCards[activeCard] = true;
         updateCardUI(activeCard, false);
 
         document.getElementById("result-wrong-name").textContent = playerName;
         document.getElementById("result-wrong-modal").style.display = "flex";
-
-        /* === AM THANH KHI TRA LOI SAI ===
-         * Them file: sounds/wrong.mp3
-         * Uncomment dong duoi:
-         */
         var wrongSound = new Audio("sound00_00000083.mp3");
         wrongSound.volume = 1;
         wrongSound.play().catch(function(){});
       }
-
       currentQuestion = null;
     };
-
     window.closeQuiz = function() {
       document.getElementById("quiz-modal").style.display = "none";
       activeCard = null;
       currentQuestion = null;
     };
-
     window.closeResult = function() {
       document.getElementById("result-correct-modal").style.display = "none";
       document.getElementById("result-wrong-modal").style.display = "none";
       stopResultFireworks();
       activeCard = null;
     };
-
-    /* ============================================
-     *  CAP NHAT GIAO DIEN THE DA HOAN THANH
-     * ============================================ */
     function updateCardUI(cardId, isCorrect = true) {
       var card = document.getElementById("card-" + cardId);
       if (!card) return;
       
-      card.style.opacity = "0.5"; // Làm mờ thẻ hơn bình thường
+      card.style.opacity = "0.5";
       card.style.cursor = "not-allowed";
-      card.style.filter = isCorrect ? "none" : "grayscale(100%)"; // Nếu sai thì biến thành màu xám
+      card.style.filter = isCorrect ? "none" : "grayscale(100%)";
       card.classList.remove("card-glow");
-      card.onclick = null; // Vô hiệu hóa click
-
-      // Tạo badge thông báo
+      card.onclick = null;
       var badge = document.createElement("div");
       badge.className = "absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full text-white shadow-md font-bold";
-      
       if (isCorrect) {
-        badge.style.background = "#00C853"; // Màu xanh lá
+        badge.style.background = "#00C853";
         badge.textContent = "✓";
       } else {
-        badge.style.background = "#FF5252"; // Màu đỏ
+        badge.style.background = "#FF5252";
         badge.textContent = "✕";
       }
-      
       card.style.position = "relative";
       card.appendChild(badge);
     }
-
     function updateProgress() {
       var count = Object.keys(completedCards).length;
       document.getElementById("progress-count").textContent = count;
     }
-
-    /* ============================================
-     *  PHAO BONG NEN (chay lien tuc)
-     * ============================================ */
     var fwCanvas = document.getElementById("fireworks-canvas");
     var fwCtx = fwCanvas.getContext("2d");
     var fwParticles = [];
     var fwAnimId = 0;
-
     function resizeFwCanvas() {
       fwCanvas.width = window.innerWidth;
       fwCanvas.height = window.innerHeight;
     }
     resizeFwCanvas();
     window.addEventListener("resize", resizeFwCanvas);
-
     function createFirework(cx, cy, particles) {
       var colors = ["#FFD700", "#FF6347", "#FF4500", "#FFA500", "#FFFF00", "#FF69B4", "#00FF7F", "#FF1493"];
       var count = 40 + Math.random() * 30;
@@ -664,14 +479,11 @@
         });
       }
     }
-
-    // Phao bong nen random
     setInterval(function() {
       var x = Math.random() * fwCanvas.width;
       var y = Math.random() * fwCanvas.height * 0.6;
       createFirework(x, y, fwParticles);
     }, 1500);
-
     function animateFireworks() {
       fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
       fwParticles = fwParticles.filter(function(p) { return p.alpha > 0.01; });
@@ -691,30 +503,21 @@
       fwAnimId = requestAnimationFrame(animateFireworks);
     }
     animateFireworks();
-
-    /* ============================================
-     *  PHAO HOA CHUC MUNG (khi tra loi dung)
-     * ============================================ */
     var rfCanvas = document.getElementById("result-fireworks-canvas");
     var rfCtx = rfCanvas.getContext("2d");
     var rfParticles = [];
     var rfAnimId = 0;
     var rfInterval = null;
-
     function startResultFireworks() {
       rfCanvas.width = window.innerWidth;
       rfCanvas.height = window.innerHeight;
       rfParticles = [];
-
-      // Ban ngay 3 dot
       createFirework(rfCanvas.width / 2, rfCanvas.height / 3, rfParticles);
       createFirework(rfCanvas.width / 4, rfCanvas.height / 4, rfParticles);
       createFirework(rfCanvas.width * 3 / 4, rfCanvas.height / 4, rfParticles);
-
       rfInterval = setInterval(function() {
         createFirework(Math.random() * rfCanvas.width, Math.random() * rfCanvas.height * 0.5, rfParticles);
       }, 600);
-
       function animateRF() {
         rfCtx.clearRect(0, 0, rfCanvas.width, rfCanvas.height);
         rfParticles = rfParticles.filter(function(p) { return p.alpha > 0.01; });
@@ -735,17 +538,12 @@
       }
       animateRF();
     }
-
     function stopResultFireworks() {
       if (rfInterval) clearInterval(rfInterval);
       cancelAnimationFrame(rfAnimId);
       rfParticles = [];
       rfCtx.clearRect(0, 0, rfCanvas.width, rfCanvas.height);
     }
-
-    /* ============================================
-     *  VAT PHAM ROI (TET)
-     * ============================================ */
     var fallingContainer = document.getElementById("falling-container");
     var emojis = ["🧧", "🏮", "🎋", "🌸", "💰", "🎆", "🎇"];
     for (var i = 0; i < 20; i++) {
@@ -759,21 +557,13 @@
       span.style.top = "-40px";
       fallingContainer.appendChild(span);
     }
-
-    /* ============================================
-     * HIEU UNG AM THANH KHI CLICK MAN HINH
-     * ============================================ */
     document.addEventListener("mousedown", function() {
-      // Thay "click-sound.mp3" bằng tên file âm thanh của bạn
       var clickSound = new Audio("sound00_00000131.mp3"); 
-      clickSound.volume = 1; // Chỉnh âm lượng nhỏ lại để không bị chói
+      clickSound.volume = 1;
       clickSound.play().catch(function(error) {
-        // Trình duyệt có thể chặn âm thanh nếu người dùng chưa tương tác
         console.log("Chờ người dùng tương tác để phát nhạc...");
       });
     });
-
-
   })();
   </script>
 
